@@ -28,10 +28,11 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <TextBlock Text="MacroForge" Grid.Column="0" FontSize="14" Margin="55 5 0 0" FontWeight="SemiBold" Foreground="#4880ff"/>
+
                     <Button Content="_" Grid.Column="1" Click="MinimizeButton_Click" Width="40" Background="Transparent" BorderThickness="0" />
-                    <Button Content="X" Grid.Column="2" Click="CloseButton_Click" Width="40" Background="Transparent" BorderThickness="0" />
+                    <Button Content="X" Grid.Column="2" Click="CloseButton_Click" Width="40" Background="Transparent" BorderThickness="0"  Margin="0 0 10 0"/>
                 </Grid>
             </Border>
             
@@ -40,7 +41,7 @@
             
             
             <!--#region Main-->
-            <Border Grid.Row="1" Background="AntiqueWhite"  Margin="10" BorderBrush="#4880ff" BorderThickness="0 0 0 1" CornerRadius="20">
+            <Border Padding="10" Grid.Row="1" Background="AntiqueWhite"  Margin="10" BorderBrush="#4880ff" BorderThickness="0 0 0 1" CornerRadius="20">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -50,30 +51,27 @@
 
                     <TextBlock Grid.Row="0" Text="Macros" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" Margin="10 0 0 0" FontWeight="SemiBold" Foreground="#4880ff"/>
 
-                    <DataGrid Margin="10"  Grid.Row="1" x:Name="MacroDataGrid">
+                    <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="1" x:Name="MacroDataGrid">
                         <DataGrid.Columns>
-                            <DataGridCheckBoxColumn CanUserResize="False" Width="auto">
+                            <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
                                 <DataGridCheckBoxColumn.HeaderTemplate>
                                     <DataTemplate>
-                                        <CheckBox/>
+                                        <CheckBox Style="{StaticResource CheckBoxStyle1}"/>
                                     </DataTemplate>
                                 </DataGridCheckBoxColumn.HeaderTemplate>
                             </DataGridCheckBoxColumn>
 
-                            <DataGridTextColumn Header="#" IsReadOnly="True" Width="auto"/>
+                            <DataGridTextColumn Header="#" IsReadOnly="True" Width="auto" Binding="{Binding Number}"/>
 
-                            <DataGridTextColumn Header="Name" IsReadOnly="True" Width="*"/>
+                            <DataGridTextColumn Header="Name" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Shortcut" IsReadOnly="True" Width="*"/>
 
-                            <DataGridTemplateColumn Header="Actions" IsReadOnly="True" Width="auto">
+                            <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <Button Style="{StaticResource GridEditButton}">
-                                                <icon:PackIconMaterial Kind="Pencil" Style="{StaticResource GridButtonIcon}"/>
-                                            </Button>
-                                            <Button Style="{StaticResource GridEditButton}">
-                                                <icon:PackIconMaterial Kind="Delete" Style="{StaticResource GridButtonIcon}"/>
+                                            <Button Style="{StaticResource GridEditButton}" Margin="5 0 0 0">
+                                                <icon:PackIconMaterial Kind="LeadPencil" Style="{StaticResource GridButtonIcon}"/>
                                             </Button>
                                         </StackPanel>
                                     </DataTemplate>
