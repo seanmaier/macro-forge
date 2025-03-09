@@ -3,10 +3,103 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MacroForge"
+        xmlns:local="clr-namespace:MacroForge" 
+        xmlns:icon="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Height="700" Width="600" WindowStartupLocation="CenterScreen" 
+        ResizeMode="NoResize" WindowStyle="None"  
+        Background="Transparent" AllowsTransparency="True">
 
-    </Grid>
+    <Border Background="#eff2f7" CornerRadius="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!--#region Header-->
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock Text="MacroForge" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Margin="55 4 0 2" FontWeight="SemiBold" Foreground="#4880ff"/>
+            </StackPanel>
+
+            <!--#endregion-->
+
+
+            <!--#region Main-->
+            <Border Grid.Row="1" Background="AntiqueWhite"  Margin="10" BorderBrush="#4880ff" BorderThickness="0 0 0 1" CornerRadius="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Macros" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" Margin="10 0 0 0" FontWeight="SemiBold" Foreground="#4880ff"/>
+
+                    <DataGrid Margin="10"  Grid.Row="1" x:Name="MacroDataGrid">
+                        <DataGrid.Columns>
+                            <DataGridCheckBoxColumn CanUserResize="False" Width="auto">
+                                <DataGridCheckBoxColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <CheckBox/>
+                                    </DataTemplate>
+                                </DataGridCheckBoxColumn.HeaderTemplate>
+                            </DataGridCheckBoxColumn>
+
+                            <DataGridTextColumn Header="#" IsReadOnly="True" Width="auto"/>
+
+                            <DataGridTextColumn Header="Name" IsReadOnly="True" Width="*"/>
+                            <DataGridTextColumn Header="Shortcut" IsReadOnly="True" Width="*"/>
+
+                            <DataGridTemplateColumn Header="Actions" IsReadOnly="True" Width="auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Style="{StaticResource GridEditButton}">
+                                                <icon:PackIconMaterial Kind="Pencil" Style="{StaticResource GridButtonIcon}"/>
+                                            </Button>
+                                            <Button Style="{StaticResource GridEditButton}">
+                                                <icon:PackIconMaterial Kind="Delete" Style="{StaticResource GridButtonIcon}"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Border Grid.Row="2" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1"
+                                CornerRadius="5" Padding="5" Background="White" Margin="0 10 10 10">
+                        <StackPanel Orientation="Horizontal">
+
+                            <Button Style="{StaticResource PagingButton}">
+                                <icon:PackIconMaterial Kind="ChevronLeft" Style="{StaticResource PagingButtonIcon}"/>
+                            </Button>
+
+                            <Rectangle Width="1" Fill="#dee4ec" Margin="3 7"/>
+
+                            <Button Style="{StaticResource PagingButton}" Content="1" />
+                            <Button Style="{StaticResource PagingButton}" Content="2" Background="#7950f2" Foreground="White"/>
+                            <Button Style="{StaticResource PagingButton}" Content="3" />
+
+                            <TextBlock Text="..." Foreground="#6c7682" VerticalAlignment="Center" Margin="10 0" FontSize="15"/>
+
+                            <Button Style="{StaticResource PagingButton}" Content="7" />
+                            <Button Style="{StaticResource PagingButton}" Content="8" />
+                            <Button Style="{StaticResource PagingButton}" Content="9" />
+                            
+                            <Rectangle Width="1" Fill="#dee4ec" Margin="3 7"/>
+
+                            <Button Style="{StaticResource PagingButton}">
+                                <icon:PackIconMaterial Kind="ChevronRight" Style="{StaticResource PagingButtonIcon}" />
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+
 </Window>

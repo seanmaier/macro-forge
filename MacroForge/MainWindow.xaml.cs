@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.ObjectModel;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -18,6 +19,22 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
+        var converter = new BrushConverter();
+        
         InitializeComponent();
+        ObservableCollection<MacroData> macroData =
+        [
+            new MacroData("1", "A", []),
+            new MacroData("2", "B", []),
+            new MacroData("3", "C", []),
+            new MacroData("4", "D", []),
+            new MacroData("5", "E", []),
+            new MacroData("6", "F", []),
+            new MacroData("7", "G", []),
+            new MacroData("8", "H", []),
+            new MacroData("9", "I", []),
+        ];
+
+        MacroDataGrid.ItemsSource = macroData;
     }
 }
