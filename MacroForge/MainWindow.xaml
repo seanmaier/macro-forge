@@ -41,7 +41,7 @@
             
             
             <!--#region Main-->
-            <Border Padding="10" Grid.Row="1" Background="AntiqueWhite"  Margin="10" BorderBrush="#4880ff" BorderThickness="0 0 0 1" CornerRadius="20">
+            <Border Padding="10" Grid.Row="1" Background="AntiqueWhite"  Margin="10" BorderBrush="#D5B9B2" BorderThickness="0 0 0 1" CornerRadius="20">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -117,9 +117,9 @@
             <!--#region Footer-->
             
             <StackPanel Margin="5" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="2">
-                <Button Content="Delete"/>
-                <Button Content="Edit"/>
-                <Button Content="Create"/>
+                <Button Content="Delete" Style="{StaticResource FooterButton}"/>
+                <Button Content="Edit" Style="{StaticResource FooterButton}"/>
+                <Button Content="Create" Style="{StaticResource FooterButton}"/>
             </StackPanel>
             
             <!--#endregion-->
