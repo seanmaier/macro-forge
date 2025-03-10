@@ -109,6 +109,20 @@
                     </Border>
                 </Grid>
             </Border>
+            
+            <!--#endregion-->
+            
+            
+            
+            <!--#region Footer-->
+            
+            <StackPanel Margin="5" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="2">
+                <Button Content="Delete"/>
+                <Button Content="Edit"/>
+                <Button Content="Create"/>
+            </StackPanel>
+            
+            <!--#endregion-->
         </Grid>
     </Border>
 
