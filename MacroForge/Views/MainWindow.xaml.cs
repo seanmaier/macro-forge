@@ -33,6 +33,12 @@ public partial class MainWindow : Window
             new MacroData("9", "I", []),
         ];
 
-        MacroDataGrid.ItemsSource = macroData;
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.CheckSaveFolder();
+        fileHandler.LoadMacrosFromFiles();
+
+
+        MacroDataGrid.ItemsSource = fileHandler.Macros;
+        //MacroDataGrid.ItemsSource = macroData;
     }
 }
