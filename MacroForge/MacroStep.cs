@@ -2,6 +2,11 @@
 
 public class MacroStep
 {
+    private int _stepNumber;
+    private CommandType _commandType;
+    private string _parameter;
+    private int delay;
+
     public MacroStep(CommandType commandType, string parameter, int delay)
     {
         _commandType = commandType;
@@ -9,8 +14,5 @@ public class MacroStep
         this.delay = delay;
     }
 
-    private int _stepNumber;
-    private CommandType _commandType;
-    private string _parameter;
-    private int delay;
+    
 }
