@@ -21,7 +21,7 @@
             <local:TitleBarControl Grid.Row="0"/>
             
             <!--#region Main-->
-            <Border Padding="10" Grid.Row="1" Background="AntiqueWhite"  Margin="10" BorderBrush="#D5B9B2" BorderThickness="0 0 0 1" CornerRadius="20">
+            <Border Grid.Row="1" Style="{StaticResource Container}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
