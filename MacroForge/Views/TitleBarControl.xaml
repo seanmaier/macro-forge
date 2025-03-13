@@ -1,5 +1,5 @@
 ﻿<!-- TitleBarControl.xaml -->
-<UserControl x:Class="MacroForge.TitleBarControl"
+<UserControl x:Class="MacroForge.Views.TitleBarControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Height="30">

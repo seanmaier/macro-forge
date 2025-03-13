@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace MacroForge;
+namespace MacroForge.Views;
 
 public partial class CreateMacro : Window
 {

@@ -1,9 +1,10 @@
-﻿<Window x:Class="MacroForge.CreateMacro"
+﻿<Window x:Class="MacroForge.Views.CreateMacro"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:MacroForge"
+        xmlns:views="clr-namespace:MacroForge.Views"
         mc:Ignorable="d"
         Title="CreateMacro" Height="700" Width="600"
         WindowStartupLocation="CenterScreen"
@@ -24,7 +25,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <local:TitleBarControl Grid.ColumnSpan="2" />
+            <views:TitleBarControl Grid.ColumnSpan="2" />
 
             <StackPanel Grid.Row="1" Grid.Column="0">
                 <Label Content="Name" />

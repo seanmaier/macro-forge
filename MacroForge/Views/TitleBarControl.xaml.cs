@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace MacroForge
+namespace MacroForge.Views
 {
     public partial class TitleBarControl : UserControl
     {

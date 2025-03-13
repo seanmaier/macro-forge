@@ -1,12 +1,13 @@
 ﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
+using MacroForge.Views;
 
 namespace MacroForge.ViewModels;
 
 public class MainViewModel
 {
     private readonly INavigationService _navigationService;
-    public ICommand NavigationCommand;
+    public ICommand NavigationCommand { get; }
 
     public MainViewModel(INavigationService navigationService)
     {
