@@ -27,39 +27,39 @@
             <local:TitleBarControl Grid.ColumnSpan="2" />
 
             <StackPanel Grid.Row="1" Grid.Column="0">
-                <TextBlock Text="Name" />
+                <Label Content="Name" />
                 <Border
-                    Grid.Column="0"
                     Padding="10" Grid.Row="1"
                     Background="AntiqueWhite"
                     Margin="10" BorderBrush="#D5B9B2"
                     BorderThickness="0 0 0 1"
                     CornerRadius="20">
-
+                    <TextBox Background="Transparent" />
                 </Border>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1">
-                <TextBlock Text="Shortcut"></TextBlock>
+                <Label Content="Shortcut" />
                 <Border
-                    Grid.Column="1"
                     Padding="10" Grid.Row="1"
                     Background="AntiqueWhite"
                     Margin="10" BorderBrush="#D5B9B2"
                     BorderThickness="0 0 0 1"
                     CornerRadius="20">
-
+                    <TextBox Background="Transparent" />
                 </Border>
             </StackPanel>
             <StackPanel
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Grid.Row="2">
+                <Label Content="Description" />
                 <Border
                     Padding="10"
                     Background="AntiqueWhite"
                     Margin="10" BorderBrush="#D5B9B2"
                     BorderThickness="0 0 0 1"
                     CornerRadius="20">
+                    <TextBox Background="Transparent" />
                 </Border>
             </StackPanel>
 
@@ -67,13 +67,14 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Grid.Row="3">
+                <Label Content="Macro Steps" />
                 <Border
                     Padding="10"
                     Background="AntiqueWhite"
                     Margin="10" BorderBrush="#D5B9B2"
                     BorderThickness="0 0 0 1"
                     CornerRadius="20">
-
+                    <TextBox Background="Transparent" />
                 </Border>
             </StackPanel>
         </Grid>
