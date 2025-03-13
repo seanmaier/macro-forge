@@ -1,4 +1,4 @@
-﻿namespace MacroForge;
+﻿namespace MacroForge.Models;
 
 public class MacroStep
 {
