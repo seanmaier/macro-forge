@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace MacroForge;
+namespace MacroForge.Interfaces;
 
 public interface INavigationService
 {

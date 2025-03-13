@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
+using MacroForge.Interfaces;
 using MacroForge.Views;
 
 namespace MacroForge.ViewModels;
