@@ -23,6 +23,6 @@ public class NavigationService: INavigationService
         }
         
         
-        window.Show();
+        window.ShowDialog();
     }
 }
