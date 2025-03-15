@@ -62,7 +62,7 @@
             </StackPanel>
             
             <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" HorizontalAlignment="Right" Orientation="Horizontal">
-                <Button Content="Cancel" Style="{StaticResource FooterButton}"/>
+                <Button Click="CancelBtn_Click" Content="Cancel" Style="{StaticResource FooterButton}"/>
                 <Button Content="Start" Style="{StaticResource FooterButton}"/>
                 <Button Content="Save" Style="{StaticResource FooterButton}"/>
             </StackPanel>

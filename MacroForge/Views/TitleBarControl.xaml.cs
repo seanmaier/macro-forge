@@ -29,7 +29,7 @@ namespace MacroForge.Views
         
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            Window? window = Window.GetWindow(this);
+            var window = Window.GetWindow(this);
             window?.Close();
         }
     }

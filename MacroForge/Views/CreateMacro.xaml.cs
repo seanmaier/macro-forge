@@ -8,4 +8,10 @@ public partial class CreateMacro : Window
     {
         InitializeComponent();
     }
+    
+    private void CancelBtn_Click(object sender, RoutedEventArgs e)
+    {
+        var window = Window.GetWindow(this);
+        window?.Close();
+    }
 }
