@@ -29,13 +29,13 @@
             <StackPanel Grid.Row="1" Grid.Column="0">
                 <Label Content="Name" Margin="20 0"/>
                 <Border Style="{StaticResource Container}">
-                    <TextBox Style="{StaticResource InputBox}"/>
+                    <TextBox Style="{StaticResource MacroTextBox}"/>
                 </Border>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1">
                 <Label Content="Shortcut" Margin="20 0" />
                 <Border Style="{StaticResource Container}">
-                    <TextBox Style="{StaticResource InputBox}"/>
+                    <TextBox Style="{StaticResource MacroTextBox}"/>
                 </Border>
             </StackPanel>
             <StackPanel
@@ -44,7 +44,7 @@
                 Grid.Row="2">
                 <Label Content="Description" Margin="20 0"/>
                 <Border Style="{StaticResource Container}">
-                    <TextBox  Height="200" Style="{StaticResource InputBox}"/>
+                    <TextBox  Height="200" Style="{StaticResource MacroTextBox}"/>
                 </Border>
             </StackPanel>
 
@@ -54,7 +54,7 @@
                 Grid.Row="3">
                 <Label Content="Macro Steps"  Margin="20 0"/>
                 <Border Style="{StaticResource Container}">
-                    <ListBox Background="Transparent" Height="200"/>
+                    <ListBox Style="{StaticResource MacroListBox}" Height="200"/>
                 </Border>
             </StackPanel>
             

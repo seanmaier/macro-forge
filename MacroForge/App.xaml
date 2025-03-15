@@ -20,9 +20,18 @@
         
         <!--#endregion-->
         
-        <!--#region InputBox-->
+        <!--#region MacroListBox-->
         
-        <Style x:Key="InputBox" TargetType="TextBox">
+        <Style x:Key="MacroListBox" TargetType="ListBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        
+        <!--#endregion-->
+        
+        <!--#region MacroTextBox-->
+        
+        <Style x:Key="MacroTextBox" TargetType="TextBox">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
