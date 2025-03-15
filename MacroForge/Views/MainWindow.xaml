@@ -100,7 +100,7 @@
             <StackPanel Margin="5" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="2">
                 <Button Content="Delete" Style="{StaticResource FooterButton}"/>
                 <Button Content="Edit" Style="{StaticResource FooterButton}"/>
-                <Button Command="{Binding NavigationCommand}" Content="Create" Style="{StaticResource FooterButton}"/>
+                <Button Command="{Binding CreateMacroCommand}" Content="Create" Style="{StaticResource FooterButton}"/>
             </StackPanel>
             
             <!--#endregion-->
