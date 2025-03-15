@@ -30,7 +30,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="Macros" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" Margin="10 0 0 0" FontWeight="SemiBold" Foreground="#4880ff"/>
+                    <TextBlock Grid.Row="0" Text="Macros" Margin="10 0" Style="{StaticResource HeaderLabel}"/>
 
                     <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="1" x:Name="MacroDataGrid">
                         <DataGrid.Columns>

@@ -29,6 +29,17 @@
         
         <!--#endregion-->
         
+        <!--#region HeaderLabel-->
+        
+        <Style x:Key="HeaderLabel" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#4880ff"></Setter>
+        </Style>
+        
+        <!--#endregion-->
+        
         <!--#region MacroTextBox-->
         
         <Style x:Key="MacroTextBox" TargetType="TextBox">
