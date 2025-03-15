@@ -20,6 +20,15 @@
         
         <!--#endregion-->
         
+        <!--#region InputBox-->
+        
+        <Style x:Key="InputBox" TargetType="TextBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        
+        <!--#endregion-->
+        
         <!--#region FooterButtons-->
         
         <Style x:Key="FooterButton" TargetType="Button">

@@ -27,24 +27,24 @@
             <views:TitleBarControl Grid.ColumnSpan="2" />
 
             <StackPanel Grid.Row="1" Grid.Column="0">
-                <Label Content="Name" />
+                <Label Content="Name" Margin="20 0"/>
                 <Border Style="{StaticResource Container}">
-                    <TextBox Background="Transparent" />
+                    <TextBox Style="{StaticResource InputBox}"/>
                 </Border>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1">
-                <Label Content="Shortcut" />
+                <Label Content="Shortcut" Margin="20 0" />
                 <Border Style="{StaticResource Container}">
-                    <TextBox Background="Transparent" />
+                    <TextBox Style="{StaticResource InputBox}"/>
                 </Border>
             </StackPanel>
             <StackPanel
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Grid.Row="2">
-                <Label Content="Description" />
+                <Label Content="Description" Margin="20 0"/>
                 <Border Style="{StaticResource Container}">
-                    <TextBox Background="Transparent" />
+                    <TextBox  Height="220" Style="{StaticResource InputBox}"/>
                 </Border>
             </StackPanel>
 
@@ -52,9 +52,9 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Grid.Row="3">
-                <Label Content="Macro Steps" />
+                <Label Content="Macro Steps"  Margin="20 0"/>
                 <Border Style="{StaticResource Container}">
-                    <TextBox Background="Transparent" />
+                    <ListBox Background="Transparent" Height="220"/>
                 </Border>
             </StackPanel>
         </Grid>
