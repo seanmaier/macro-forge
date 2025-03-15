@@ -27,16 +27,16 @@
 
             <views:TitleBarControl Grid.ColumnSpan="2" />
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="Edit Macro" Margin="20 5" Style="{StaticResource HeaderLabel}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Edit Macro" Margin="20 12" Style="{StaticResource HeaderLabel}"/>
             
             <StackPanel Grid.Row="2" Grid.Column="0">
-                <Label Content="Name" Margin="20 0"/>
+                <Label Content="Name" Style="{StaticResource TextBoxLabel}"/>
                 <Border Style="{StaticResource Container}">
                     <TextBox Style="{StaticResource MacroTextBox}"/>
                 </Border>
             </StackPanel>
             <StackPanel Grid.Row="2" Grid.Column="1">
-                <Label Content="Shortcut" Margin="20 0" />
+                <Label Content="Shortcut" Style="{StaticResource TextBoxLabel}" />
                 <Border Style="{StaticResource Container}">
                     <TextBox Style="{StaticResource MacroTextBox}"/>
                 </Border>
@@ -45,7 +45,7 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Grid.Row="3">
-                <Label Content="Description" Margin="20 0"/>
+                <Label Content="Description" Style="{StaticResource TextBoxLabel}"/>
                 <Border Style="{StaticResource Container}">
                     <TextBox  Height="180" Style="{StaticResource MacroTextBox}"/>
                 </Border>
@@ -55,7 +55,7 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Grid.Row="4">
-                <Label Content="Macro Steps"  Margin="20 0"/>
+                <Label Content="Macro Steps"  Style="{StaticResource TextBoxLabel}"/>
                 <Border Style="{StaticResource Container}">
                     <ListBox Style="{StaticResource MacroListBox}" Height="180"/>
                 </Border>
