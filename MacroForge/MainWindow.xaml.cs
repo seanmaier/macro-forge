@@ -42,13 +42,18 @@ public partial class MainWindow : Window
             new MacroData("9", "I", []),
         ];
 
+        // TODO aufrauemen wenn wir weiter sind
+        MacroDataList mdl = new MacroDataList();
+
         FileHandler fileHandler = new FileHandler();
-        fileHandler.CheckSaveFolder();
-        fileHandler.LoadMacrosFromFiles();
+        fileHandler.LoadMacrosFromFiles(mdl);
 
 
-        MacroDataGrid.ItemsSource = fileHandler.Macros;
-        //MacroDataGrid.ItemsSource = macroData;
+        MacroDataGrid.ItemsSource = mdl.Macros;
+
+        // zu testzwecken direktes speichern muss natuerlich weg spaeter
+        //fileHandler.SaveMacrosToFiles(mdl);
+
     }
 
     private void CloseButton_Click(object sender, RoutedEventArgs e)
