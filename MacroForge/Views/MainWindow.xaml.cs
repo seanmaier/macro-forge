@@ -16,12 +16,16 @@ public partial class MainWindow : Window
 
         DataContext = new MainViewModel(new NavigationService());
         
+        // TODO aufrauemen wenn wir weiter sind
+        MacroDataList mdl = new MacroDataList();
+
         FileHandler fileHandler = new FileHandler();
-        fileHandler.CheckSaveFolder();
-        fileHandler.LoadMacrosFromFiles();
+        fileHandler.LoadMacrosFromFiles(mdl);
 
 
-        MacroDataGrid.ItemsSource = fileHandler.Macros;
-        //MacroDataGrid.ItemsSource = macroData;
+        MacroDataGrid.ItemsSource = mdl.Macros;
+
+        // zu testzwecken direktes speichern muss natuerlich weg spaeter
+        //fileHandler.SaveMacrosToFiles(mdl);
     }
 }
