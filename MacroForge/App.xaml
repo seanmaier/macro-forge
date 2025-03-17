@@ -3,17 +3,64 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:MacroForge"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             StartupUri="MainWindow.xaml"
+             StartupUri="Views/MainWindow.xaml"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Application.Resources>
 
+        <!--#region Container-->
+        
+        <Style x:Key="Container" TargetType="Border">
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Background" Value="AntiqueWhite"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="BorderBrush" Value="#D5B9B2"/>
+            <Setter Property="BorderThickness" Value="0 0 0 1"/>
+            <Setter Property="CornerRadius" Value="20"/>
+        </Style>
+        
+        
+        <!--#region MacroListBox-->
+        
+        <Style x:Key="MacroListBox" TargetType="ListBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        
+        
+        <!--#region HeaderLabel-->
+        
+        <Style x:Key="HeaderLabel" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#4880ff"></Setter>
+        </Style>
+        
+        
+        <!--#region TextBoxLabel-->
+        
+        <Style x:Key="TextBoxLabel" TargetType="Label">
+            <Setter Property="Margin" Value="16 0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10 0"/>
+        </Style>
+        
+        
+        <!--#region MacroTextBox-->
+        
+        <Style x:Key="MacroTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        
+        
         <!--#region FooterButtons-->
         
         <Style x:Key="FooterButton" TargetType="Button">
             <Setter Property="Width" Value="100"></Setter>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Padding" Value="10 0 10 0"/>
-            <Setter Property="Foreground" Value="#6c7682" />
             <Setter Property="Background" Value="#ECE2D0" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
 
