@@ -14,7 +14,7 @@ public class MacroData
     public DateTime? LastChanged { get => _lastChanged; set => _lastChanged = value; }
     public List<string>? Shortcut { get => _shortcut; set => _shortcut = value; }
     public string? Description { get => _description; set => _description = value; }
-    public List<MacroStep> MacroSteps { get => _macroSteps; set => _macroSteps = value; }
+    public List<MacroStep>? MacroSteps { get => _macroSteps; set => _macroSteps = value; }
 
     public MacroData(string name, string description, List<MacroStep> macroSteps, List<string>? shortcut = null)
     {
@@ -29,6 +29,13 @@ public class MacroData
     public MacroData(string name)
     {
         Name = name;
+        CreatedAt = DateTime.Now;
+        LastChanged = CreatedAt;
+    }
+
+    public MacroData()
+    {
+        Name = "";
         CreatedAt = DateTime.Now;
         LastChanged = CreatedAt;
     }
