@@ -1,5 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Runtime.InteropServices;
 using System.Windows;
+using MacroForge.Recorder;
 using MacroForge.Services;
 using MacroForge.ViewModels;
 
@@ -25,7 +26,47 @@ public partial class MainWindow : Window
 
         MacroDataGrid.ItemsSource = mdl.Macros;
 
+        Input[] inputs = new[]
+        {
+            new Input
+            {
+                type = (int)InputType.Keyboard,
+                u = new InputUnion
+                {
+                    ki = new KeyboardInput
+                    {
+                        wVk = 0,
+                        wScan = 0x11,
+                        dwFlags = (uint)(KeyEventF.KeyDown | KeyEventF.Scancode),
+                        dwExtraInfo = GetMessageExtraInfo()
+                    }
+                }
+            },
+            new Input
+            {
+                type = (int)InputType.Keyboard,
+                u = new InputUnion
+                {
+                    ki = new KeyboardInput
+                    {
+                        wVk = 0,
+                        wScan = 0x11,
+                        dwFlags = (uint)(KeyEventF.KeyDown | KeyEventF.Scancode),
+                        dwExtraInfo = GetMessageExtraInfo()
+                    }
+                }
+            },
+        };
+
+        SendInput((uint)inputs.Length, inputs, Marshal.SizeOf(typeof(Input)));
+
         // zu testzwecken direktes speichern muss natuerlich weg spaeter
         //fileHandler.SaveMacrosToFiles(mdl);
     }
+    
+    [DllImport("user32.dll", SetLastError = true)]
+    private static extern uint SendInput(uint nInputs, Input[] inputs, int cbSize);
+    
+    [DllImport("user32.dll")]
+    private static extern IntPtr GetMessageExtraInfo();
 }
