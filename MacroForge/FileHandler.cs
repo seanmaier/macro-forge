@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using MacroForge.Models;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,8 +13,11 @@ namespace MacroForge
 {
     class FileHandler
     {
-        private string saveFolder = "macros";
-        private string savePath = "macros/{0}.json";
+        static private string saveFolder = "macros";
+        static private string savePath   = saveFolder + "\\";
+        static private string saveFormat = savePath   + "{0}.json";
+
+        private JsonSchema jSchema = new JsonSchema();
         
 
         public FileHandler()
@@ -26,15 +30,18 @@ namespace MacroForge
             if(!Directory.Exists(saveFolder))
             {
                 Directory.CreateDirectory(saveFolder);
-                CreateJsonSchema();
             }
+            CreateJsonSchema();
         }
 
         public void CreateJsonSchema()
         {
-            // json schema anlegen
+            // json schema anlegen falls diese nicht existiert
+            if (!File.Exists(savePath + jSchema.FileName))
+            {
+                File.WriteAllText(savePath + jSchema.FileName, jSchema.CompleteJsonString);
+            }
 
-            // TODO mach schema
         }
 
         public void LoadMacrosFromFiles(MacroDataList mdl)
@@ -45,10 +52,21 @@ namespace MacroForge
             // dateien im folder durchgehen
             foreach (string macroFileName in Directory.EnumerateFiles(saveFolder))
             {
+                if (macroFileName.Equals(savePath + jSchema.FileName))
+                {
+                    // jsonschema ueberspringen
+                    continue;
+                }
+
                 if (macroFileName.EndsWith(".json"))
                 {
                     // wenn datein json ist dann versuchen in macrodata zu serialisieren
                     string json = File.ReadAllText(macroFileName);
+                    IList<string> messages;
+                    if (!jSchema.Validate(json,out messages))
+                    {
+                        throw new Exception();
+                    }
                     MacroData? macroData = JsonSerializer.Deserialize<MacroData>(json);
 
                     // TODO wenn eins nicht erstellt werden konnte dann sollten wir das wahrscheinlicha noch ausgeben aber wies noch net wie ausgaben werden
@@ -56,11 +74,12 @@ namespace MacroForge
                     if (macroData != null)
                     {
                         // wenn macroData erstellt werden konnte, ueberpruefe den namen und pack in liste falls der name uebereinstimmt
-                        string fileName = macroFileName.Substring(7, macroFileName.IndexOf(".json") - 7);
-                        if (!fileName.Equals(macroData.Name))
+                        string fileName = macroFileName.Substring(7, macroFileName.LastIndexOf(".json") - 7);
+                        if (macroData.Name != "" && !fileName.Equals(macroData.Name))
                         {
-                            throw new MismatchException("Der Name der Datei und der Name des Makros müssen übereinstimmen.");
+                            throw new MismatchException($"Der Name der Datei {macroFileName.Substring(7)} und der Name des Makros {macroData.Name} stimmen nicht überein. Es wird der Name der Datei übernommen.");
                         }
+                        macroData.Name = fileName;
                         mdl.AddMacro(macroData);
                     }
                 }
@@ -68,7 +87,7 @@ namespace MacroForge
 
             if (mdl.Macros.Count == 0)
             {
-                // weis net ob wir vielleicht meldun machen bei keine gefunden?
+                // TODO weis net ob wir vielleicht meldun machen bei keine gefunden?
                 //throw new FileNotFoundException("Es wurden keine Macrodateien gefunden.");
             }
         }
@@ -96,7 +115,7 @@ namespace MacroForge
                 CheckSaveFolder();
             }
             string json = JsonSerializer.Serialize(macroData);
-            File.WriteAllText(string.Format(savePath, macroData.Name), json);
+            File.WriteAllText(string.Format(saveFormat, macroData.Name), json);
         }
     }
 
