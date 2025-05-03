@@ -47,7 +47,7 @@
                             <DataGridTextColumn Header="Name" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Shortcut" IsReadOnly="True" Width="*"/>
 
-                            <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
+                            <DataGridTemplateColumn Header="Play" IsReadOnly="True" Width="auto">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
@@ -98,7 +98,7 @@
             <!--#region Footer-->
             
             <StackPanel Margin="5" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="2">
-                <Button Content="Delete" Style="{StaticResource FooterButton}"/>
+                <Button Content="Delete" Style="{StaticResource FooterButton}" Click="Button_Click"/>
                 <Button Command="{Binding EditMacroCommand}" Content="Edit" Style="{StaticResource FooterButton}"/>
                 <Button Command="{Binding CreateMacroCommand}" Content="Create" Style="{StaticResource FooterButton}"/>
             </StackPanel>
