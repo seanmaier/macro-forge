@@ -1,8 +1,11 @@
 ﻿using System.Runtime.InteropServices;
 using System.Windows;
-using MacroForge.Recorder;
+using MacroForge.Models;
+using MacroForge.Playback;
 using MacroForge.Services;
 using MacroForge.ViewModels;
+using WindowsInput;
+using WindowsInput.Native;
 
 namespace MacroForge.Views;
 
@@ -11,6 +14,10 @@ namespace MacroForge.Views;
 /// </summary>
 public partial class MainWindow : Window
 {
+
+
+    private CancellationTokenSource _cts;
+    private MacroDataList _mdl = new ();
     public MainWindow()
     {
         InitializeComponent();
@@ -18,13 +25,12 @@ public partial class MainWindow : Window
         DataContext = new MainViewModel(new NavigationService());
         
         // TODO aufrauemen wenn wir weiter sind
-        MacroDataList mdl = new MacroDataList();
 
         FileHandler fileHandler = new FileHandler();
-        fileHandler.LoadMacrosFromFiles(mdl);
+        fileHandler.LoadMacrosFromFiles(_mdl);
 
 
-        MacroDataGrid.ItemsSource = mdl.Macros;
+        MacroDataGrid.ItemsSource = _mdl.Macros;
 
         
 
@@ -34,67 +40,75 @@ public partial class MainWindow : Window
 
 
 
-    public void testinputs()
+    private void BtnClick_Cancel(object sender, RoutedEventArgs e)
     {
-        MacroData macro = new MacroData("inputtest");
-
-        MacroStep mstep = new MacroStep(CommandType.MouseEvent, 0);
-        mstep.NewInput(InputType.Mouse, 100, 100, (MouseEventF.Move | MouseEventF.LeftDown));
-        macro.MacroSteps.Add(mstep);
-
-        mstep = new MacroStep(CommandType.MouseEvent, 0);
-        mstep.NewInput(InputType.Mouse, -100, -100, MouseEventF.LeftUp);
-        macro.MacroSteps.Add(mstep);
-
-        MacroStep step = new MacroStep(CommandType.KeyboardEvent, 0);
-        step.NewInput(InputType.Keyboard, 0x23, (KeyEventF.KeyDown | (KeyEventF.KeyDown | KeyEventF.KeyUp)));
-        macro.MacroSteps.Add(step);
-        step.NewInput(InputType.Keyboard, 0x23, (KeyEventF.KeyDown | KeyEventF.KeyUp));
-        step = new MacroStep(CommandType.KeyboardEvent, 0);
-        macro.MacroSteps.Add(step);
-
-        step = new MacroStep(CommandType.KeyboardEvent, 0);
-        step.NewInput(InputType.Keyboard, 0x1e, (KeyEventF.KeyDown | (KeyEventF.KeyDown | KeyEventF.KeyUp)));
-        macro.MacroSteps.Add(step);
-        step = new MacroStep(CommandType.KeyboardEvent, 0);
-        step.NewInput(InputType.Keyboard, 0x1e, (KeyEventF.KeyDown | KeyEventF.KeyUp));
-        macro.MacroSteps.Add(step);
-
-        step = new MacroStep(CommandType.KeyboardEvent, 0);
-        step.NewInput(InputType.Keyboard, 0x26, (KeyEventF.KeyDown | (KeyEventF.KeyDown | KeyEventF.KeyUp)));
-        macro.MacroSteps.Add(step);
-        step = new MacroStep(CommandType.KeyboardEvent, 0);
-        step.NewInput(InputType.Keyboard, 0x26, (KeyEventF.KeyDown | KeyEventF.KeyUp));
-        macro.MacroSteps.Add(step);
-
-        step = new MacroStep(CommandType.KeyboardEvent, 0);
-        step.NewInput(InputType.Keyboard, 0x26, (KeyEventF.KeyDown | (KeyEventF.KeyDown | KeyEventF.KeyUp)));
-        macro.MacroSteps.Add(step);
-        step = new MacroStep(CommandType.KeyboardEvent, 0);
-        step.NewInput(InputType.Keyboard, 0x26, (KeyEventF.KeyDown | KeyEventF.KeyUp));
-        macro.MacroSteps.Add(step);
-
-        step = new MacroStep(CommandType.KeyboardEvent, 0);
-        step.NewInput(InputType.Keyboard, 0x18, (KeyEventF.KeyDown | (KeyEventF.KeyDown | KeyEventF.KeyUp)));
-        macro.MacroSteps.Add(step);
-        step = new MacroStep(CommandType.KeyboardEvent, 0);
-        step.NewInput(InputType.Keyboard, 0x18, (KeyEventF.KeyDown | KeyEventF.KeyUp));
-        macro.MacroSteps.Add(step);
-
-
-        
-
-
-        Player player = new Player();
-        player.PlayMacro(macro);
+        _cts.Cancel();
     }
 
-    [DllImport("user32.dll")]
-    private static extern IntPtr GetMessageExtraInfo();
-
-    private void Button_Click(object sender, RoutedEventArgs e)
+    private async void BtnClick_Test(object sender, RoutedEventArgs e)
     {
-        testinputs();
+        var player = new Player();
 
+        var macroList = new List<MacroStep>([ 
+            new MacroStep
+            {
+                CommandType = CommandType.KeyboardEvent,
+                KeyboardAction = new KeyboardAction{EventType = KeyEventType.Press, Key = VirtualKeyCode.LWIN}
+            },
+            new MacroStep {
+                Delay = 500,
+            CommandType = CommandType.KeyboardEvent,
+            KeyboardAction = new KeyboardAction{EventType = KeyEventType.Press, Key = VirtualKeyCode.VK_N}
+            },
+            new MacroStep
+            {
+                CommandType = CommandType.KeyboardEvent,
+                KeyboardAction = new KeyboardAction{EventType = KeyEventType.Press, Key = VirtualKeyCode.VK_O}
+            },
+            new MacroStep
+            {
+                CommandType = CommandType.KeyboardEvent,
+                KeyboardAction = new KeyboardAction{EventType = KeyEventType.Press, Key = VirtualKeyCode.VK_T}
+            },
+            new MacroStep
+            {
+                CommandType = CommandType.KeyboardEvent,
+                KeyboardAction = new KeyboardAction{EventType = KeyEventType.Press, Key = VirtualKeyCode.VK_E}
+            },
+            new MacroStep
+            {
+                CommandType = CommandType.KeyboardEvent,
+                Delay = 500,
+                KeyboardAction = new KeyboardAction{EventType = KeyEventType.Press, Key = VirtualKeyCode.RETURN}
+            },
+            new MacroStep
+            {
+                CommandType = CommandType.KeyboardEvent,
+                Delay = 500,
+                KeyboardAction = new KeyboardAction{EventType = KeyEventType.Down, Key = VirtualKeyCode.VK_E}
+            },
+            new MacroStep
+            {
+                CommandType = CommandType.MouseEvent,
+                MouseAction = new MouseAction{EventType = MouseEventType.MoveTo, X = 200, Y = 100}
+            },
+            new MacroStep
+            {
+                CommandType = CommandType.KeyboardEvent,
+                Delay = 1000,
+                KeyboardAction = new KeyboardAction{EventType = KeyEventType.Up, Key = VirtualKeyCode.VK_S}
+            },
+        ]);
+
+        var macro = new MacroData("TestMacro", macroList);
+        _cts = new CancellationTokenSource();
+        try
+        {
+            await player.PlayAsync(macro, _cts.Token);
+        }
+        catch
+        {
+            MessageBox.Show("Macro was cancelled");
+        }
     }
 }
