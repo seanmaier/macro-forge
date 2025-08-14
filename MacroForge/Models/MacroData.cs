@@ -2,28 +2,30 @@
 
 public class MacroData
 {
-    private string _name;
-    private DateTime _createdAt;
-    private DateTime? _lastChanged;
-    private string? _shortcut;
-    private string _description;
-    private List<MacroStep> _macroSteps;
 
-    public string Name { get => _name; set => _name = value; }
-    public DateTime CreatedAt { get => _createdAt; set => _createdAt = value; }
-    public DateTime? LastChanged { get => _lastChanged; set => _lastChanged = value; }
-    public string? Shortcut { get => _shortcut; set => _shortcut = value; }
-    public string Description { get => _description; set => _description = value; }
-    public List<MacroStep> MacroSteps { get => _macroSteps; set => _macroSteps = value; }
-
-    public MacroData(string name, string description, List<MacroStep> macroSteps, string? shortcut = null)
+    public MacroData()
     {
-        Name = name;
-        Shortcut = shortcut;
-        Description = description;
-        MacroSteps = macroSteps;
-        CreatedAt = DateTime.Now;
+        Name = "";
+        MacroSteps = [];
     }
 
+    public MacroData(string name)
+    {
+        Name = name;
+        MacroSteps = [];
+    }
+
+    public MacroData(string name, List<MacroStep> macroSteps)
+    {
+        Name = name;
+        MacroSteps = macroSteps;
+    }
     
+    public Guid Id = new();
+    public string Name { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime? LastChanged { get; set; }
+    public string? Shortcut { get; set; }
+    public string? Description { get; set; }
+    public List<MacroStep> MacroSteps { get; set; }
 }
