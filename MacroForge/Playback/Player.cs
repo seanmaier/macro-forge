@@ -91,9 +91,4 @@ public class Player()
             await Task.Delay(delayMs);
         }
     }
-    
-    public void Cancel()
-    {
-        // TODO implement cancel
-    }
 }
