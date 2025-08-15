@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MacroForge.Models;
 
 namespace MacroForge
 {
-    
-
     class MacroDataList
     {
-        private List<MacroData> macros;
-        public List<MacroData> Macros { get => macros; set => macros = value; }
+        private List<MacroData> _macros;
+        public List<MacroData> Macros { get => _macros; set => _macros = value; }
 
         public MacroDataList()
         {
-            macros = [];
+            _macros = [];
         }
 
         public MacroData? AddMacro(MacroData? macroData) 
@@ -23,7 +22,7 @@ namespace MacroForge
             // hinzufuegen eines macros zur kiste                                                                                           P.s. K ist mit absicht
             if (macroData != null)
             {
-                macros.Add(macroData);
+                _macros.Add(macroData);
             }
 
             return macroData;
@@ -38,15 +37,15 @@ namespace MacroForge
             return AddMacro(macroData);
         }
 
-        public string GenerateDefaultName()
+        private string GenerateDefaultName()
         {
             return GenerateDefaultName(null);
         }
 
-        public string GenerateDefaultName(string? failedName)
+        private string GenerateDefaultName(string? failedName)
         {
             // suche aller exisitierenden namen entsprechend dem default
-            List<MacroData> potentialDefaultNameMacros = macros.Where(macro => macro.Name.StartsWith("Macro", StringComparison.CurrentCultureIgnoreCase)).ToList();
+            List<MacroData> potentialDefaultNameMacros = _macros.Where(macro => macro.Name.StartsWith("Macro", StringComparison.CurrentCultureIgnoreCase)).ToList();
 
             int number = 0;
             int parsed = 0;
@@ -68,11 +67,8 @@ namespace MacroForge
                 number++;
                 return $"Macro{number}";
             }
-            else
-            {
-                return name;
-            }
-
+            
+            return name;
         }
     }
 }
