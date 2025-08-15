@@ -5,8 +5,13 @@ namespace MacroForge.Playback;
 
 public class Player()
 {
-    private readonly InputSimulator _sim = new();
+    private readonly InputSimulator _inputSimulator = new();
 
+    /// <summary>
+    /// Method to play macros asynchronous to allow cancellation of macro
+    /// </summary>
+    /// <param name="macro">Macro to be played</param>
+    /// <param name="cts">Cancellation token</param>
     public async Task PlayAsync(MacroData macro, CancellationToken cts)
     {
         foreach (var step in macro.MacroSteps)
@@ -15,7 +20,7 @@ public class Player()
             
             await Task.Delay(step.Delay, cts);
 
-            if (step.CommandType == CommandType.KeyboardEvent)
+            if (step.CommandType == CommandType.KeyboardEvent) // actions to execute based on mouse or keyboard macro step
             {
                 var keyAction = step.KeyboardAction;
 
@@ -36,19 +41,19 @@ public class Player()
 
     private void SimulateKeyboard(KeyboardAction keyAction)
     {
-        if (keyAction.Modifiers.Count > 0)
+        if (keyAction.Modifiers.Count > 0) // modifiers like [ctrl, shift]
         {
-            _sim.Keyboard.ModifiedKeyStroke(keyAction.Modifiers.ToArray(), keyAction.Key);
+            _inputSimulator.Keyboard.ModifiedKeyStroke(keyAction.Modifiers.ToArray(), keyAction.Key);
         }
         else
         {
             switch (keyAction.EventType)
             {
-                case KeyEventType.Press: _sim.Keyboard.KeyPress(keyAction.Key);
+                case KeyEventType.Press: _inputSimulator.Keyboard.KeyPress(keyAction.Key);
                     break;
-                case KeyEventType.Down: _sim.Keyboard.KeyDown(keyAction.Key);
+                case KeyEventType.Down: _inputSimulator.Keyboard.KeyDown(keyAction.Key);
                     break;
-                case KeyEventType.Up: _sim.Keyboard.KeyUp(keyAction.Key);
+                case KeyEventType.Up: _inputSimulator.Keyboard.KeyUp(keyAction.Key);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -60,20 +65,20 @@ public class Player()
     {
         switch (mouseAction.EventType)
         {
-            case MouseEventType.LeftClick: _sim.Mouse.LeftButtonClick();
+            case MouseEventType.LeftClick: _inputSimulator.Mouse.LeftButtonClick();
                 break;
-            case MouseEventType.LeftDoubleClick: _sim.Mouse.LeftButtonDoubleClick();
+            case MouseEventType.LeftDoubleClick: _inputSimulator.Mouse.LeftButtonDoubleClick();
                 break;
-            case MouseEventType.RightClick: _sim.Mouse.RightButtonClick();
+            case MouseEventType.RightClick: _inputSimulator.Mouse.RightButtonClick();
                 break;
-            case MouseEventType.RightDoubleClick: _sim.Mouse.RightButtonDoubleClick();
+            case MouseEventType.RightDoubleClick: _inputSimulator.Mouse.RightButtonDoubleClick();
                 break;
-            case MouseEventType.MoveTo: _sim.Mouse.MoveMouseTo(mouseAction.X, mouseAction.Y);
+            case MouseEventType.MoveTo: _inputSimulator.Mouse.MoveMouseTo(mouseAction.X, mouseAction.Y);
                 break;
             case MouseEventType.HorizontalScroll:
-                _sim.Mouse.HorizontalScroll(mouseAction.HorizontalScroll);
+                _inputSimulator.Mouse.HorizontalScroll(mouseAction.HorizontalScroll);
                 break;
-            case MouseEventType.VerticalScroll: _sim.Mouse.VerticalScroll(mouseAction.VerticalScroll);
+            case MouseEventType.VerticalScroll: _inputSimulator.Mouse.VerticalScroll(mouseAction.VerticalScroll);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -87,7 +92,7 @@ public class Player()
 
         for (int i = 0; i < steps; i++)
         {
-            _sim.Mouse.MoveMouseBy(stepX, stepY);
+            _inputSimulator.Mouse.MoveMouseBy(stepX, stepY);
             await Task.Delay(delayMs);
         }
     }
