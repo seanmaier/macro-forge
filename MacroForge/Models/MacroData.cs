@@ -21,7 +21,7 @@ public class MacroData
         MacroSteps = macroSteps;
     }
     
-    public Guid Id = new();
+    public Guid Id { get; set; } = new();
     public string Name { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime? LastChanged { get; set; }
