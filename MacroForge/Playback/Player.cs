@@ -10,31 +10,33 @@ public class Player()
     /// <summary>
     /// Method to play macros asynchronous to allow cancellation of macro
     /// </summary>
-    /// <param name="macro">Macro to be played</param>
+    /// <param name="steps">Macro steps to be played</param>
     /// <param name="cts">Cancellation token</param>
-    public async Task PlayAsync(MacroData macro, CancellationToken cts)
+    public async Task PlayAsync(List<MacroStep> steps, CancellationToken cts)
     {
-        foreach (var step in macro.MacroSteps)
+        foreach (var step in steps)
         {
             cts.ThrowIfCancellationRequested();
             
-            await Task.Delay(step.Delay, cts);
 
-            if (step.CommandType == CommandType.KeyboardEvent) // actions to execute based on mouse or keyboard macro step
+            switch (step.CommandType) // actions to execute based on macro step event
             {
-                var keyAction = step.KeyboardAction;
-
-                if (keyAction == null) return;
-                
-                SimulateKeyboard(keyAction);
-            }
-            else
-            {
-                var mouseAction = step.MouseAction;
-
-                if (mouseAction == null) return;
-                
-               SimulateMouse(mouseAction);
+                case CommandType.Delay:
+                    if (!step.Delay.HasValue) return;
+                    await Task.Delay(step.Delay.Value, cts);
+                    break;
+                case CommandType.KeyboardEvent:
+                    var keyAction = step.KeyboardAction;
+                    if (keyAction == null) return;
+                    SimulateKeyboard(keyAction);
+                    break;
+                case CommandType.MouseEvent:
+                    var mouseAction = step.MouseAction;
+                    if (mouseAction == null) return;
+                    SimulateMouse(mouseAction);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }
@@ -49,8 +51,6 @@ public class Player()
         {
             switch (keyAction.EventType)
             {
-                case KeyEventType.Press: _inputSimulator.Keyboard.KeyPress(keyAction.Key);
-                    break;
                 case KeyEventType.Down: _inputSimulator.Keyboard.KeyDown(keyAction.Key);
                     break;
                 case KeyEventType.Up: _inputSimulator.Keyboard.KeyUp(keyAction.Key);
@@ -67,11 +67,7 @@ public class Player()
         {
             case MouseEventType.LeftClick: _inputSimulator.Mouse.LeftButtonClick();
                 break;
-            case MouseEventType.LeftDoubleClick: _inputSimulator.Mouse.LeftButtonDoubleClick();
-                break;
             case MouseEventType.RightClick: _inputSimulator.Mouse.RightButtonClick();
-                break;
-            case MouseEventType.RightDoubleClick: _inputSimulator.Mouse.RightButtonDoubleClick();
                 break;
             case MouseEventType.MoveTo: _inputSimulator.Mouse.MoveMouseTo(mouseAction.X, mouseAction.Y);
                 break;

@@ -4,5 +4,4 @@ public enum KeyEventType
 {
     Down,
     Up,
-    Press
 }

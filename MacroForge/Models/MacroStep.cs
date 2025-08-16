@@ -9,7 +9,7 @@ public class MacroStep
     /// <summary>
     /// Delay before the macro gets executed
     /// </summary>
-    public int Delay { get; set; }
+    public int? Delay { get; set; }
     /// <summary>
     /// The specific action executed for keyboard event
     /// </summary>
