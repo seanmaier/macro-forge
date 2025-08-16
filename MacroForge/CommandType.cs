@@ -4,4 +4,5 @@ public enum CommandType
 {
     KeyboardEvent,
     MouseEvent,
+    Delay
 }
