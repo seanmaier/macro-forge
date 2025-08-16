@@ -5,7 +5,7 @@ using WindowsInput.Native;
 namespace MacroForge;
 
 /// <summary>
-/// Contains manual written tests and helper methods for creating and running tests
+/// Contains manually written tests and helper methods for creating and running tests
 /// </summary>
 /// <param name="ct">Cancellation token for the player</param>
 public class MacroTesting(CancellationToken ct)
