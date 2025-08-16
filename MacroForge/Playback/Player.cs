@@ -17,7 +17,7 @@ public class Player()
         foreach (var step in steps)
         {
             cts.ThrowIfCancellationRequested();
-            
+
 
             switch (step.CommandType) // actions to execute based on macro step event
             {
@@ -43,21 +43,16 @@ public class Player()
 
     private void SimulateKeyboard(KeyboardAction keyAction)
     {
-        if (keyAction.Modifiers.Count > 0) // modifiers like [ctrl, shift]
+        switch (keyAction.EventType)
         {
-            _inputSimulator.Keyboard.ModifiedKeyStroke(keyAction.Modifiers.ToArray(), keyAction.Key);
-        }
-        else
-        {
-            switch (keyAction.EventType)
-            {
-                case KeyEventType.Down: _inputSimulator.Keyboard.KeyDown(keyAction.Key);
-                    break;
-                case KeyEventType.Up: _inputSimulator.Keyboard.KeyUp(keyAction.Key);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            case KeyEventType.Down:
+                _inputSimulator.Keyboard.KeyDown(keyAction.Key);
+                break;
+            case KeyEventType.Up:
+                _inputSimulator.Keyboard.KeyUp(keyAction.Key);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 
@@ -65,22 +60,26 @@ public class Player()
     {
         switch (mouseAction.EventType)
         {
-            case MouseEventType.LeftClick: _inputSimulator.Mouse.LeftButtonClick();
+            case MouseEventType.LeftClick:
+                _inputSimulator.Mouse.LeftButtonClick();
                 break;
-            case MouseEventType.RightClick: _inputSimulator.Mouse.RightButtonClick();
+            case MouseEventType.RightClick:
+                _inputSimulator.Mouse.RightButtonClick();
                 break;
-            case MouseEventType.MoveTo: _inputSimulator.Mouse.MoveMouseTo(mouseAction.X, mouseAction.Y);
+            case MouseEventType.MoveTo:
+                _inputSimulator.Mouse.MoveMouseTo(mouseAction.X, mouseAction.Y);
                 break;
             case MouseEventType.HorizontalScroll:
                 _inputSimulator.Mouse.HorizontalScroll(mouseAction.HorizontalScroll);
                 break;
-            case MouseEventType.VerticalScroll: _inputSimulator.Mouse.VerticalScroll(mouseAction.VerticalScroll);
+            case MouseEventType.VerticalScroll:
+                _inputSimulator.Mouse.VerticalScroll(mouseAction.VerticalScroll);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
     }
-    
+
     private async Task SmoothMoveMouseBy(int deltaX, int deltaY, int steps = 50, int delayMs = 5)
     {
         int stepX = deltaX / steps;
