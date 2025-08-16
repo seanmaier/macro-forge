@@ -22,7 +22,7 @@ public class Player()
             switch (step.CommandType) // actions to execute based on macro step event
             {
                 case CommandType.Delay:
-                    if (!step.Delay.HasValue) return;
+                    if (!step.Delay.HasValue) throw new NullReferenceException();
                     await Task.Delay(step.Delay.Value, cts);
                     break;
                 case CommandType.KeyboardEvent:
