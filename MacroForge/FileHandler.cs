@@ -10,7 +10,7 @@ namespace MacroForge
         static private string savePath   = saveFolder + "\\";
         static private string saveFormat = savePath   + "{0}.json";
 
-        private JsonSchema jSchema = new JsonSchema();
+        private JsonSchema jSchema = new();
         
 
         public FileHandler()
@@ -24,17 +24,6 @@ namespace MacroForge
             {
                 Directory.CreateDirectory(saveFolder);
             }
-            CreateJsonSchema();
-        }
-
-        public void CreateJsonSchema()
-        {
-            // json schema anlegen falls diese nicht existiert
-            if (!File.Exists(savePath + jSchema.FileName))
-            {
-                File.WriteAllText(savePath + jSchema.FileName, jSchema.CompleteJsonString);
-            }
-
         }
 
         public void LoadMacrosFromFiles(MacroDataList mdl)
