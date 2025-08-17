@@ -7,7 +7,7 @@ namespace MacroForge.Schemas
     class JsonSchema
     {
         private JSchema jsonSchema;
-        private static readonly string _fileName = "MacroJsonSchema.json";
+        private static readonly string _fileName = "MacroJsonSchema.v1.json";
 
         public string FileName => _fileName;
         public string CompleteJsonString => SchemaLoader.ReadSchema("MacroForge.Schemas.MacroJsonSchema.v1.json");
@@ -31,7 +31,7 @@ namespace MacroForge.Schemas
             // valiedierung eines string aus einer json ob dieser mit dem jsonschema uebereinstimmt und rueckgabe von fehlern
             JObject macro = JObject.Parse(validateString);
             errormessages = null;
-            return macro.IsValid(jsonSchema,out errormessages);
+            return macro.IsValid(jsonSchema, out errormessages);
         }
     }
 }
