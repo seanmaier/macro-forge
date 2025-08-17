@@ -11,7 +11,7 @@
             "type": "string"
         },
         "LastChanged": {
-            "type": "string"
+            "type": ["string", "null"]
         },
         "Shortcut": {
             "type": ["array", "null"],
