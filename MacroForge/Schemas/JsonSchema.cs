@@ -1,20 +1,16 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.IO;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MacroForge
+namespace MacroForge.Schemas
 {
     class JsonSchema
     {
         private JSchema jsonSchema;
-        static private string fileName = "MacroJsonSchema.json";
+        private static string fileName = "MacroJsonSchema.json";
 
-        public string FileName { get => fileName; }
-        public string CompleteJsonString { get => completeJsonString; }
+        public string FileName => fileName;
+        public string CompleteJsonString => File.ReadAllText(fileName);
 
         public JsonSchema()
         {
