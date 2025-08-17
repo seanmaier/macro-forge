@@ -7,6 +7,9 @@ namespace MacroForge.Schemas
     class JsonSchema
     {
         private JSchema jsonSchema;
+        private static readonly string _fileName = "MacroJsonSchema.json";
+
+        public string FileName => _fileName;
         public string CompleteJsonString => SchemaLoader.ReadSchema("MacroForge.Schemas.MacroJsonSchema.v1.json");
 
         public JsonSchema()
