@@ -30,22 +30,27 @@
                     "type": "object",
                     "properties": {
                         "StepNumber": {
-                            "type": "integer"
+                            "type": "integer",
+                            "description": "The current macro step number"
                         },
                         "CommandType": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "The type of event - Keyboard, Mouse, Delay"
                         },
                         "Delay": {
-                            "type": "integer"
+                            "type": "integer",
+                            "description": "Time to delay next input"
                         },
                         "KeyboardAction": {
                             "type": ["object", "null"],
                             "properties": {
                                 "Key": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "Key of the current step"
                                 },
                                 "EventType": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "Action to be executed for the selected key"
                                 }
                             },
                             "required": [
@@ -57,19 +62,24 @@
                             "type": ["object", "null"],
                             "properties": {
                                 "EventType": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "description": "The current event of the mouse - LeftClick, RightClick etc."
                                 },
                                 "X": {
-                                    "type": "integer"
+                                    "type": "integer",
+                                    "description": "The x-point of interaction"
                                 },
                                 "Y": {
-                                    "type": "integer"
+                                    "type": "integer",
+                                    "description": "The y-point of interaction"
                                 },
                                 "VerticalScroll": {
-                                    "type": "integer"
+                                    "type": "integer",
+                                    "description": "The amount to be vertically scrolled"
                                 },
                                 "HorizontalScroll": {
-                                    "type": "integer"
+                                    "type": "integer",
+                                    "description": "The amount to be horizontally scrolled"
                                 }
                             },
                             "required": ["EventType"]
