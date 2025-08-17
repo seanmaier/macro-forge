@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using MacroForge.Models;
 using MacroForge.Schemas;
 
@@ -46,13 +47,19 @@ class FileHandler
             {
                 // wenn datein json ist dann versuchen in macrodata zu serialisieren
                 string json = File.ReadAllText(macroFileName);
-                IList<string> messages;
-                if (!jSchema.Validate(json, out messages))
+                
+                if (!jSchema.Validate(json, out var messages))
                 {
                     throw new ValidationException($"JSON validation failed. Errors: {string.Join(", ", messages)}");
                 }
-
-                MacroData? macroData = JsonSerializer.Deserialize<MacroData>(json);
+                
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                options.Converters.Add(new JsonStringEnumConverter());
+                
+                MacroData? macroData = JsonSerializer.Deserialize<MacroData>(json, options);
 
                 // TODO wenn eins nicht erstellt werden konnte dann sollten wir das wahrscheinlicha noch ausgeben aber wies noch net wie ausgaben werden
 
