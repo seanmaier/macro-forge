@@ -1,0 +1,91 @@
+{
+    "type": "object",
+    "properties": {
+        "Id": {
+            "type": "string"
+        },
+        "Name": {
+            "type": "string"
+        },
+        "CreatedAt": {
+            "type": "string"
+        },
+        "LastChanged": {
+            "type": "string"
+        },
+        "Shortcut": {
+            "type": ["array", "null"],
+            "items": {
+                "type": "string"
+            },
+            "minItems": 0,
+            "uniqueItems": true
+        },
+        "Description": {
+            "type": ["string", "null"]
+        },
+        "MacroSteps": {
+            "type": ["array", "null"],
+            "items": [{
+                    "type": "object",
+                    "properties": {
+                        "StepNumber": {
+                            "type": "integer"
+                        },
+                        "CommandType": {
+                            "type": "string"
+                        },
+                        "Delay": {
+                            "type": "integer"
+                        },
+                        "KeyboardAction": {
+                            "type": ["object", "null"],
+                            "properties": {
+                                "Key": {
+                                    "type": "string"
+                                },
+                                "EventType": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "Key",
+                                "EventType"
+                            ]
+                        },
+                        "MouseAction": {
+                            "type": ["object", "null"],
+                            "properties": {
+                                "EventType": {
+                                    "type": "string"
+                                },
+                                "X": {
+                                    "type": "integer"
+                                },
+                                "Y": {
+                                    "type": "integer"
+                                },
+                                "VerticalScroll": {
+                                    "type": "integer"
+                                },
+                                "HorizontalScroll": {
+                                    "type": "integer"
+                                }
+                            },
+                            "required": ["EventType"]
+                        }
+                    },
+                    "required": [
+                        "StepNumber",
+                        "CommandType"
+                    ]
+                }
+            ]
+        }
+    },
+    "required": [
+        "Id",
+        "Name",
+        "CreatedAt"
+    ]
+}
