@@ -38,4 +38,9 @@
       </Page>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Schemas\MacroJsonSchema.v1.json" />
+      <EmbeddedResource Include="Schemas\MacroJsonSchema.v1.json" />
+    </ItemGroup>
+
 </Project>
