@@ -3,6 +3,10 @@
 public class MacroStep
 {
     /// <summary>
+    /// The number of the current step
+    /// </summary>
+    public int StepNumber { get; set; }
+    /// <summary>
     /// Specifies whether the macro step involves a keyboard or mouse action.
     /// </summary>
     public CommandType CommandType { get; set; }
