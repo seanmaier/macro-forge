@@ -10,50 +10,30 @@ public class Player()
     /// <summary>
     /// Method to play macros asynchronous to allow cancellation of macro
     /// </summary>
-    /// <param name="macro">Macro to be played</param>
+    /// <param name="steps">Macro steps to be played</param>
     /// <param name="cts">Cancellation token</param>
-    public async Task PlayAsync(MacroData macro, CancellationToken cts)
+    public async Task PlayAsync(List<MacroStep> steps, CancellationToken cts)
     {
-        foreach (var step in macro.MacroSteps)
+        foreach (var step in steps)
         {
             cts.ThrowIfCancellationRequested();
-            
-            await Task.Delay(step.Delay, cts);
 
-            if (step.CommandType == CommandType.KeyboardEvent) // actions to execute based on mouse or keyboard macro step
+
+            switch (step.CommandType) // actions to execute based on macro step event
             {
-                var keyAction = step.KeyboardAction;
-
-                if (keyAction == null) return;
-                
-                SimulateKeyboard(keyAction);
-            }
-            else
-            {
-                var mouseAction = step.MouseAction;
-
-                if (mouseAction == null) return;
-                
-               SimulateMouse(mouseAction);
-            }
-        }
-    }
-
-    private void SimulateKeyboard(KeyboardAction keyAction)
-    {
-        if (keyAction.Modifiers.Count > 0) // modifiers like [ctrl, shift]
-        {
-            _inputSimulator.Keyboard.ModifiedKeyStroke(keyAction.Modifiers.ToArray(), keyAction.Key);
-        }
-        else
-        {
-            switch (keyAction.EventType)
-            {
-                case KeyEventType.Press: _inputSimulator.Keyboard.KeyPress(keyAction.Key);
+                case CommandType.Delay:
+                    if (!step.Delay.HasValue) throw new NullReferenceException();
+                    await Task.Delay(step.Delay.Value, cts);
                     break;
-                case KeyEventType.Down: _inputSimulator.Keyboard.KeyDown(keyAction.Key);
+                case CommandType.KeyboardEvent:
+                    var keyAction = step.KeyboardAction;
+                    if (keyAction == null) return;
+                    SimulateKeyboard(keyAction);
                     break;
-                case KeyEventType.Up: _inputSimulator.Keyboard.KeyUp(keyAction.Key);
+                case CommandType.MouseEvent:
+                    var mouseAction = step.MouseAction;
+                    if (mouseAction == null) return;
+                    SimulateMouse(mouseAction);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -61,30 +41,45 @@ public class Player()
         }
     }
 
-    private void SimulateMouse(MouseAction mouseAction)
+    private void SimulateKeyboard(KeyboardAction keyAction)
     {
-        switch (mouseAction.EventType)
+        switch (keyAction.EventType)
         {
-            case MouseEventType.LeftClick: _inputSimulator.Mouse.LeftButtonClick();
+            case KeyEventType.Down:
+                _inputSimulator.Keyboard.KeyDown(keyAction.Key);
                 break;
-            case MouseEventType.LeftDoubleClick: _inputSimulator.Mouse.LeftButtonDoubleClick();
-                break;
-            case MouseEventType.RightClick: _inputSimulator.Mouse.RightButtonClick();
-                break;
-            case MouseEventType.RightDoubleClick: _inputSimulator.Mouse.RightButtonDoubleClick();
-                break;
-            case MouseEventType.MoveTo: _inputSimulator.Mouse.MoveMouseTo(mouseAction.X, mouseAction.Y);
-                break;
-            case MouseEventType.HorizontalScroll:
-                _inputSimulator.Mouse.HorizontalScroll(mouseAction.HorizontalScroll);
-                break;
-            case MouseEventType.VerticalScroll: _inputSimulator.Mouse.VerticalScroll(mouseAction.VerticalScroll);
+            case KeyEventType.Up:
+                _inputSimulator.Keyboard.KeyUp(keyAction.Key);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
     }
-    
+
+    private void SimulateMouse(MouseAction mouseAction)
+    {
+        switch (mouseAction.EventType)
+        {
+            case MouseEventType.LeftClick:
+                _inputSimulator.Mouse.LeftButtonClick();
+                break;
+            case MouseEventType.RightClick:
+                _inputSimulator.Mouse.RightButtonClick();
+                break;
+            case MouseEventType.MoveTo:
+                _inputSimulator.Mouse.MoveMouseTo(mouseAction.X, mouseAction.Y);
+                break;
+            case MouseEventType.HorizontalScroll:
+                _inputSimulator.Mouse.HorizontalScroll(mouseAction.HorizontalScroll);
+                break;
+            case MouseEventType.VerticalScroll:
+                _inputSimulator.Mouse.VerticalScroll(mouseAction.VerticalScroll);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
     private async Task SmoothMoveMouseBy(int deltaX, int deltaY, int steps = 50, int delayMs = 5)
     {
         int stepX = deltaX / steps;

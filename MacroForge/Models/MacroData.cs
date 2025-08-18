@@ -1,4 +1,6 @@
-﻿namespace MacroForge.Models;
+﻿using WindowsInput.Native;
+
+namespace MacroForge.Models;
 
 public class MacroData
 {
@@ -25,7 +27,7 @@ public class MacroData
     public string Name { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime? LastChanged { get; set; }
-    public string? Shortcut { get; set; } // Custom shortcut chosen by user
+    public List<VirtualKeyCode>? Shortcut { get; set; } // Custom shortcut chosen by user
     public string? Description { get; set; }
     public List<MacroStep> MacroSteps { get; set; }
 }
