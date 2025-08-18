@@ -1,0 +1,101 @@
+{
+    "type": "object",
+    "properties": {
+        "Id": {
+            "type": "string"
+        },
+        "Name": {
+            "type": "string"
+        },
+        "CreatedAt": {
+            "type": "string"
+        },
+        "LastChanged": {
+            "type": ["string", "null"]
+        },
+        "Shortcut": {
+            "type": ["array", "null"],
+            "items": {
+                "type": "string"
+            },
+            "minItems": 0,
+            "uniqueItems": true
+        },
+        "Description": {
+            "type": ["string", "null"]
+        },
+        "MacroSteps": {
+            "type": ["array", "null"],
+            "items": [{
+                    "type": "object",
+                    "properties": {
+                        "StepNumber": {
+                            "type": "integer",
+                            "description": "The current macro step number"
+                        },
+                        "CommandType": {
+                            "type": "string",
+                            "description": "The type of event - Keyboard, Mouse, Delay"
+                        },
+                        "Delay": {
+                            "type": "integer",
+                            "description": "Time to delay next input"
+                        },
+                        "KeyboardAction": {
+                            "type": ["object", "null"],
+                            "properties": {
+                                "Key": {
+                                    "type": "string",
+                                    "description": "Key of the current step"
+                                },
+                                "EventType": {
+                                    "type": "string",
+                                    "description": "Action to be executed for the selected key"
+                                }
+                            },
+                            "required": [
+                                "Key",
+                                "EventType"
+                            ]
+                        },
+                        "MouseAction": {
+                            "type": ["object", "null"],
+                            "properties": {
+                                "EventType": {
+                                    "type": "string",
+                                    "description": "The current event of the mouse - LeftClick, RightClick etc."
+                                },
+                                "X": {
+                                    "type": "integer",
+                                    "description": "The x-point of interaction"
+                                },
+                                "Y": {
+                                    "type": "integer",
+                                    "description": "The y-point of interaction"
+                                },
+                                "VerticalScroll": {
+                                    "type": "integer",
+                                    "description": "The amount to be vertically scrolled"
+                                },
+                                "HorizontalScroll": {
+                                    "type": "integer",
+                                    "description": "The amount to be horizontally scrolled"
+                                }
+                            },
+                            "required": ["EventType"]
+                        }
+                    },
+                    "required": [
+                        "StepNumber",
+                        "CommandType"
+                    ]
+                }
+            ]
+        }
+    },
+    "required": [
+        "Id",
+        "Name",
+        "CreatedAt"
+    ]
+}
